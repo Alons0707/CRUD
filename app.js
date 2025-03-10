@@ -76,9 +76,11 @@ app.post('/registro', (req, res) =>{
         if (err){
             return res.status(500).send('Error al momento de registrar');
         }
-        res.send('Registro del pastel exitoso');
+        res.send(`
+            <h1>!Pastel registrado exitosamente¡</h1>
+            <p>EL pastel "${nombre}" ha sido registrado correctamente</p>
+            <a href="/"> Volver al inicio</a> | <a href="/registro">Registrar otro pastel</a> `);
     });
-
 });
 
 //Ruta para la lista de pasteles
