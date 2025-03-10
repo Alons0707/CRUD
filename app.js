@@ -16,13 +16,13 @@ app.use(express.urlencoded({ extended: true})); //permite interpretar los datos 
 
 //Conexion a SQLite
 
-const db = new sqlite3.Database('./db/database.db'), (err) => {
+const db = new sqlite3.Database('./db/database.db', (err) => {
     if (err) {
-        console.error('Error al conectar con la base de datos:', err.message);
-        } else {
-        console.log('Conectado a la  base de datos.');
-        }
-};
+      console.error('Error al conectar a la base de datos:', err.message);
+    } else {z
+      console.log('Conectado a la base de datos SQLite.');
+    }
+  });
 
 //Crear tabla de pasteles
 db.run(`
