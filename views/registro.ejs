@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width", initial-scale="1.0">
     <title>Registro Pasteles</title>
-    <link rel="stylesheet" href="/public/styles.css">
+    <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
     <h1>Registrar pastel</h1>
@@ -32,7 +32,8 @@
         <input type="date" id="fecha_creacion" name="fecha_creacion" required><br>
 
         <label for="es_vegano">¿Es vegano?</label>
-        <input type="checkbox" id="es_vegano" name="es_vegano" value="1"><br>
+        <input type="checkbox" id="es_vegano" name="es_vegano" value="1">
+        <input type="hidden" name="es_vegano" value="0"><br>
 
         <label for="decoraciones">Decoraciones:</label>
         <input type="text" id="decoraciones" name="decoraciones" required><br>

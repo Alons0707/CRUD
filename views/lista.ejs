@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Pasteles</title>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
   <h1>Lista de Pasteles</h1>
@@ -19,6 +19,7 @@
         <th>Fecha de creación</th>
         <th>¿Es vegano?</th>
         <th>Decoraciones</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -32,6 +33,14 @@
           <td><%= pastel.fecha_creacion %></td>
           <td><%= pastel.es_vegano ? 'Sí' : 'No' %></td>
           <td><%= pastel.decoraciones %></td>
+          <td>
+            <form action="/eliminar/<%= pastel.id%>" method="POST" style="display: inline;">
+                <button type="submit">Eliminar</button>
+            </form>
+            <a href="/editar/<%= pastel.id %>">
+                <button>Editar</button>
+            </a>
+          </td>
         </tr>
       <% }) %>    <!--No entendí para que eran-->
     </tbody>
