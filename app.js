@@ -38,3 +38,37 @@ db.run(`
       decoraciones TEXT NOT NULL
     )
   `);  
+
+//POST
+
+app.post('/registro', (req, res) =>{
+    const {nombre, sabor, tamaño, precio, descripcion, fecha_creacion, es_vegano, decoraciones }
+    =req.body;
+    
+    //Validaciones
+    if(!nombre || !sabor ||  !tamaño || !precio || !descripcion || !fecha_creacion || !decoraciones){
+        return res.status(400).send('Todos los campos deben ser llenados');
+    }
+
+    if (isNaN(precio)){
+        return res.status(400).send('El precio debe ser un valor numerico');
+    }
+    
+//Convertir es_vegano a booleano
+    const esVegano = es_vegano ? 1:0;
+
+//Insertar datos a la base de datos
+    const query= `
+    INSERT INTO pasteles (nombre, sabor, tamaño, precio, descripcion, fecha_creacion, es_vegano, decoraciones)
+    Values (?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+    const params = [nombre, sabor, tamaño, precio, descripcion, fecha_creacion, es_vegano, decoraciones];
+
+    db.run(query, params, function(err){
+        if (err){
+            return res.status(500).send('Error al momento de registrar');
+        }
+        res.send('Registro del pastel exitoso');
+    });
+
+});
