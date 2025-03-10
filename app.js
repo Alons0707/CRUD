@@ -1,0 +1,40 @@
+//Los comentarios son para saber para que es que, no piense mal miss :(
+const express = require('express'); //framework a usar
+const app = express(); //instancia de express que manejará las solicitudes y respuestas
+const path = require('path'); //modulo de node que trabaja con rutas y archivos
+const sqlite3 = require('sqlite3').verbose(); //libreria que permite interactuar con la base de datos
+
+//Configurar EJS motor de plantillas
+
+app.set('view engine', 'ejs'); //Le dice a Express que se usa EJS como motor de plantilla
+app.set('views', path.join(__dirname, 'views')); //Especifica la carpeta donde se encuentran las vistas
+
+//Middleware
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true})); //permite interpretar los datos del HTML
+
+//Conexion a SQLite
+
+const db = new sqlite3.Database('./db/database.db'), (err) => {
+    if (err) {
+        console.error('Error al conectar con la base de datos:', err.message);
+        } else {
+        console.log('Conectado a la  base de datos.');
+        }
+};
+
+//Crear tabla de pasteles
+db.run(`
+    CREATE TABLE IF NOT EXISTS pasteles (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      nombre TEXT NOT NULL,
+      sabor TEXT NOT NULL,
+      tamaño TEXT NOT NULL,
+      precio REAL NOT NULL,
+      descripcion TEXT NOT NULL,
+      fecha_creacion TEXT NOT NULL,
+      es_vegano INTEGER NOT NULL,  -- 1 para sí, 0 para no
+      decoraciones TEXT NOT NULL
+    )
+  `);  
