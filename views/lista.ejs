@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Pasteles</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Lista de Pasteles</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Sabor</th>
+        <th>Tamaño</th>
+        <th>Precio</th>
+        <th>Descripción</th>
+        <th>Fecha de creación</th>
+        <th>¿Es vegano?</th>
+        <th>Decoraciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% pasteles.forEach(pastel => { %>
+        <tr>
+          <td><%= pastel.nombre %></td>
+          <td><%= pastel.sabor %></td>
+          <td><%= pastel.tamaño %></td>
+          <td>$<%= pastel.precio.toFixed(2) %></td>
+          <td><%= pastel.descripcion %></td>
+          <td><%= pastel.fecha_creacion %></td>
+          <td><%= pastel.es_vegano ? 'Sí' : 'No' %></td>
+          <td><%= pastel.decoraciones %></td>
+        </tr>
+      <% }) %>    <!--No entendí para que eran-->
+    </tbody>
+  </table>
+  <a href="/">Volver al inicio</a>
+</body>
+</html>

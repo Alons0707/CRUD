@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true})); //permite interpretar los datos 
 const db = new sqlite3.Database('./db/database.db', (err) => {
     if (err) {
       console.error('Error al conectar a la base de datos:', err.message);
-    } else {z
+    } else {
       console.log('Conectado a la base de datos SQLite.');
     }
   });
@@ -38,7 +38,15 @@ db.run(`
       decoraciones TEXT NOT NULL
     )
   `);  
+//Ruta principal
+app.get('/', (req, res) => {
+    res.render('index');
+});
 
+//Ruta para mostrar el registro
+app.get('/registro', (req, res) =>{
+    res.render('registro');
+});
 //POST
 
 app.post('/registro', (req, res) =>{
@@ -72,3 +80,21 @@ app.post('/registro', (req, res) =>{
     });
 
 });
+
+//Ruta para la lista de pasteles
+    
+    app.get('/lista', (req, res) =>  {
+        const query = 'SELECT * FROM pasteles';
+        db.all(query, [], (err, pasteles) =>{
+            if (err) {
+                return res.status(500).sen('Error al obtener lista de pasteles');         
+            }
+            res.render('lista', {pasteles});
+        });
+    });
+
+//Iniciar servidor
+    const PORT = 3000;
+        app.listen(PORT, () => {
+        console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    });
